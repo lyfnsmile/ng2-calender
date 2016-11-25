@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import UtilsService from './utils.service';
-console.log(new UtilsService())
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -8,7 +8,7 @@ console.log(new UtilsService())
     providers: [UtilsService]
 })
 export class AppComponent {
-    public utils
+    private utils
     public results
     public currentDate
     public selectedIndex
