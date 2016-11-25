@@ -16,7 +16,6 @@ export class AppComponent {
     constructor(utils: UtilsService) {
         this.utils = utils;
         this.init();
-        console.log(this.results)
     }
 
     private init(dateTime ? : string): void {
@@ -134,7 +133,7 @@ export class AppComponent {
         let [year, month, day] = this.currentDate.split('-');
         const _year = new Date().getFullYear();
         const _month = new Date().getMonth() + 1;
-        if (_year == year && _month == month) return;
+        if (_year === +year && _month === +month) return;
         this.selectedIndex = 0;
         this.init()
     }
