@@ -19,29 +19,34 @@ export class AppComponent {
     }
 
     private init(dateTime ? : string): void {
-        let date, year, month, day;
+        let date: Date, year, month, day;
 
         if (dateTime) {
             date = new Date(dateTime);
-            [year, month, day] = this.currentDate.split('-');
+            [year, month] = this.currentDate.split('-');
         } else {
             date = new Date();
             year = date.getFullYear();
             month = date.getMonth() + 1;
-            day = date.getDate();
         }
 
         const _year = new Date().getFullYear();
         const _month = new Date().getMonth() + 1;
-        var _day = new Date().getDate()
+        const _day = new Date().getDate()
 
 
-        this.currentDate = `${year}-${month}-${day}`
+        this.currentDate = `${year}-${month}`
 
         const weekLength = 7;
-        const monthSize = this.utils.getMonthSize();
-        const prevMonthSize = this.utils.getMonthSize(`${year}/${month - 1}/1`);
-        const firstDay = this.utils.getFirstDay(year, month - 1);
+        let monthSize = this.utils.getMonthSize(`${year}/${month}/1`);
+        let prevMonthSize: number;
+        if (month == 1) {
+            prevMonthSize = this.utils.getMonthSize(`${year-1}/12/1`);
+        } else {
+            prevMonthSize = this.utils.getMonthSize(`${year}/${month - 1}/1`);
+        }
+
+        const firstDay: number = this.utils.getFirstDay(year, month - 1);
 
         let lines: number = Math.ceil((firstDay + monthSize) / weekLength);
         let initPrevDay = prevMonthSize - firstDay;
@@ -98,39 +103,38 @@ export class AppComponent {
 
     public onSelect(days: number): void {
         this.selectedIndex = days;
-        let [year, month, day] = this.currentDate.split('-');
-        day = days;
-        this.currentDate = `${year}-${month}-${day}`;
+        let [year, month] = this.currentDate.split('-');
+        this.currentDate = `${year}-${month}`;
     }
 
 
     public tabYear(val: number): void {
         this.selectedIndex = 0;
-        let [year, month, day] = this.currentDate.split('-');
+        let [year, month] = this.currentDate.split('-');
         year = +year + val;
-        this.currentDate = `${year}-${month}-${day}`;
+        this.currentDate = `${year}-${month}`;
         this.init(this.currentDate)
     }
 
     public tabMonth(val: number): void {
         this.selectedIndex = 0;
-        let [year, month, day] = this.currentDate.split('-');
+        let [year, month] = this.currentDate.split('-');
         if (month == 12 && val === 1) {
             year = +year + val;
             month = 1;
-        } else if (month == 1 && val == -1) {
+        } else if (month == 1 && val === -1) {
             year = +year + val;
             month = 12;
         } else {
             month = +month + val;
         }
 
-        this.currentDate = `${year}-${month}-${day}`;
+        this.currentDate = `${year}-${month}`;
         this.init(this.currentDate);
     }
 
     public backToday(): void {
-        let [year, month, day] = this.currentDate.split('-');
+        let [year, month] = this.currentDate.split('-');
         const _year = new Date().getFullYear();
         const _month = new Date().getMonth() + 1;
         if (_year === +year && _month === +month) return;
