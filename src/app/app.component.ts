@@ -34,7 +34,6 @@ export class AppComponent {
         const _month = new Date().getMonth() + 1;
         const _day = new Date().getDate()
 
-
         this.currentDate = `${year}-${month}`
 
         const weekLength = 7;
@@ -73,7 +72,6 @@ export class AppComponent {
                 }
             } else {
                 if (i - firstDay + 1 === _day && +year === _year && +month === _month) {
-
                     _m[i] = {
                         weekIndex,
                         date: i - firstDay + 1,
@@ -107,7 +105,6 @@ export class AppComponent {
         this.currentDate = `${year}-${month}`;
     }
 
-
     public tabYear(val: number): void {
         this.selectedIndex = 0;
         let [year, month] = this.currentDate.split('-');
@@ -134,11 +131,11 @@ export class AppComponent {
     }
 
     public backToday(): void {
+        this.selectedIndex = 0;
         let [year, month] = this.currentDate.split('-');
         const _year = new Date().getFullYear();
         const _month = new Date().getMonth() + 1;
         if (_year === +year && _month === +month) return;
-        this.selectedIndex = 0;
         this.init()
     }
 }
