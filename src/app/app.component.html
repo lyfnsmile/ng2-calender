@@ -25,7 +25,7 @@
       </tr>
       <tr *ngFor="let result of results" let i="index">
         <td *ngFor="let res of result" let idx="index">
-          <span (click)="onSelect(res.date)" [ngClass]="{'disable':!res.isCurMonth,'highlight':res.isCurDay,'selected':res.date==selectedIndex&&res.isCurMonth}">
+          <span (click)="onSelect(res.date,res.isCurMonth)" [ngClass]="{'disable':!res.isCurMonth,'highlight':res.isCurDay,'selected':res.date==selectedIndex&&res.isCurMonth}">
                 {{res.date}}</span></td>
       </tr>
     </tbody>

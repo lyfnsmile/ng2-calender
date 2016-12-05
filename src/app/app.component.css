@@ -115,7 +115,7 @@ div.calender table.table tbody tr td .selected {
 
 div.calender table.table tbody tr td .disable {
     color: #b4b4b4;
-    cursor: default;
+    cursor: not-allowed;
 }
 
 div.calender table.table tr.day {

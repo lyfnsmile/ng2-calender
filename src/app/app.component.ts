@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import UtilsService from './utils.service';
+import { UtilsService } from './utils.service';
 
 @Component({
     selector: 'app-root',
@@ -8,13 +8,11 @@ import UtilsService from './utils.service';
     providers: [UtilsService]
 })
 export class AppComponent {
-    private utils
     public results
     public currentDate
     public selectedIndex
 
-    constructor(utils: UtilsService) {
-        this.utils = utils;
+    constructor(private utils: UtilsService) {
         this.init();
     }
 
@@ -99,7 +97,8 @@ export class AppComponent {
         }
     }
 
-    public onSelect(days: number): void {
+    public onSelect(days: number, isCurMonth: boolean): void {
+        if (!isCurMonth) return;
         this.selectedIndex = days;
         let [year, month] = this.currentDate.split('-');
         this.currentDate = `${year}-${month}`;
